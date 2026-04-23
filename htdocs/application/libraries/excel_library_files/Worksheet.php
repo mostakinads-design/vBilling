@@ -356,16 +356,36 @@ class Spreadsheet_Excel_Writer_Worksheet extends Spreadsheet_Excel_Writer_BIFFwr
     var $_input_encoding;
 
     /**
-    * Constructor
-    *
-    * @param string  $name         The name of the new worksheet
+     * Constructor
+     *
+     * @param string  $name         The name of the new worksheet
     * @param integer $index        The index of the new worksheet
     * @param mixed   &$activesheet The current activesheet of the workbook we belong to
     * @param mixed   &$firstsheet  The first worksheet in the workbook we belong to
     * @param mixed   &$url_format  The default format for hyperlinks
-    * @param mixed   &$parser      The formula parser created for the Workbook
-    * @access private
-    */
+     * @param mixed   &$parser      The formula parser created for the Workbook
+     * @access private
+     */
+    function __construct($BIFF_version, $name,
+                                                $index, &$activesheet,
+                                                &$firstsheet, &$str_total,
+                                                &$str_unique, &$str_table,
+                                                &$url_format, &$parser)
+    {
+        $this->Spreadsheet_Excel_Writer_Worksheet($BIFF_version, $name, $index, $activesheet, $firstsheet, $str_total, $str_unique, $str_table, $url_format, $parser);
+    }
+
+    /**
+     * Constructor
+     *
+     * @param string  $name         The name of the new worksheet
+     * @param integer $index        The index of the new worksheet
+     * @param mixed   &$activesheet The current activesheet of the workbook we belong to
+     * @param mixed   &$firstsheet  The first worksheet in the workbook we belong to
+     * @param mixed   &$url_format  The default format for hyperlinks
+     * @param mixed   &$parser      The formula parser created for the Workbook
+     * @access private
+     */
     function Spreadsheet_Excel_Writer_Worksheet($BIFF_version, $name,
                                                 $index, &$activesheet,
                                                 &$firstsheet, &$str_total,
@@ -373,7 +393,7 @@ class Spreadsheet_Excel_Writer_Worksheet extends Spreadsheet_Excel_Writer_BIFFwr
                                                 &$url_format, &$parser)
     {
         // It needs to call its parent's constructor explicitly
-        $this->Spreadsheet_Excel_Writer_BIFFwriter();
+        parent::__construct();
         $this->_BIFF_version   = $BIFF_version;
         $rowmax                = 65536; // 16384 in Excel 5
         $colmax                = 256;

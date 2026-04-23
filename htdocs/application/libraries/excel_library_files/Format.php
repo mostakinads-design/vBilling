@@ -243,13 +243,13 @@ class Spreadsheet_Excel_Writer_Format
     var $_right_color;
 
     /**
-    * Constructor
-    *
-    * @access private
-    * @param integer $index the XF index for the format.
-    * @param array   $properties array with properties to be set on initialization.
-    */
-    function Spreadsheet_Excel_Writer_Format($BIFF_version, $index = 0, $properties =  array())
+     * Constructor
+     *
+     * @access private
+     * @param integer $index the XF index for the format.
+     * @param array   $properties array with properties to be set on initialization.
+     */
+    function __construct($BIFF_version, $index = 0, $properties =  array())
     {
         $this->_xf_index       = $index;
         $this->_BIFF_version   = $BIFF_version;
@@ -303,6 +303,18 @@ class Spreadsheet_Excel_Writer_Format
                 $this->$method_name($value);
             }
         }
+    }
+
+    /**
+     * Constructor
+     *
+     * @access private
+     * @param integer $index the XF index for the format.
+     * @param array   $properties array with properties to be set on initialization.
+     */
+    function Spreadsheet_Excel_Writer_Format($BIFF_version, $index = 0, $properties =  array())
+    {
+        $this->__construct($BIFF_version, $index, $properties);
     }
 
 

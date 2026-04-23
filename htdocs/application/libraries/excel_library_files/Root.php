@@ -38,16 +38,16 @@ class OLE_PPS_Root extends OLE_PPS
     var $_tmp_dir;
     
     /**
-    * Constructor
-    *
-    * @access public
-    * @param integer $time_1st A timestamp
-    * @param integer $time_2nd A timestamp
-    */
-    function OLE_PPS_Root($time_1st, $time_2nd, $raChild)
+     * Constructor
+     *
+     * @access public
+     * @param integer $time_1st A timestamp
+     * @param integer $time_2nd A timestamp
+     */
+    function __construct($time_1st, $time_2nd, $raChild)
     {
         $this->_tmp_dir = '';
-        $this->OLE_PPS(
+        parent::__construct(
            null, 
            OLE::Asc2Ucs('Root Entry'),
            OLE_PPS_TYPE_ROOT,
@@ -58,6 +58,18 @@ class OLE_PPS_Root extends OLE_PPS
            $time_2nd,
            null,
            $raChild);
+    }
+
+    /**
+     * Constructor
+     *
+     * @access public
+     * @param integer $time_1st A timestamp
+     * @param integer $time_2nd A timestamp
+     */
+    function OLE_PPS_Root($time_1st, $time_2nd, $raChild)
+    {
+        $this->__construct($time_1st, $time_2nd, $raChild);
     }
 
     /**

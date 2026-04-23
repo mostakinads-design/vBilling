@@ -85,11 +85,11 @@ class Spreadsheet_Excel_Writer_BIFFwriter
     var $_limit;
 
     /**
-    * Constructor
-    *
-    * @access public
-    */
-    function Spreadsheet_Excel_Writer_BIFFwriter()
+     * Constructor
+     *
+     * @access public
+     */
+    function __construct()
     {
         $this->_byte_order = '';
         $this->_data       = '';
@@ -97,6 +97,16 @@ class Spreadsheet_Excel_Writer_BIFFwriter
         $this->_limit      = 2080;
         // Set the byte order
         $this->_setByteOrder();
+    }
+
+    /**
+     * Constructor
+     *
+     * @access public
+     */
+    function Spreadsheet_Excel_Writer_BIFFwriter()
+    {
+        $this->__construct();
     }
 
     /**

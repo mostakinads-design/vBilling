@@ -105,7 +105,7 @@ class OLE_PPS
     var $children = array();
 
     /**
-    * The constructor
+     * The constructor
     *
     * @access public
     * @param integer $No   The PPS index
@@ -115,10 +115,10 @@ class OLE_PPS
     * @param integer $next The index of the next PPS
     * @param integer $dir  The index of it's first child if this is a Dir or Root PPS
     * @param integer $time_1st A timestamp
-    * @param integer $time_2nd A timestamp
-    * @param array   $children Array containing children PPS for this PPS
-    */
-    function OLE_PPS($No, $name, $type, $prev, $next, $dir, $time_1st, $time_2nd, $data, $children)
+     * @param integer $time_2nd A timestamp
+     * @param array   $children Array containing children PPS for this PPS
+     */
+    function __construct($No, $name, $type, $prev, $next, $dir, $time_1st, $time_2nd, $data, $children)
     {
         $this->No      = $No;
         $this->Name    = $name;
@@ -136,6 +136,25 @@ class OLE_PPS
         else {
             $this->Size = 0;
         }
+    }
+
+    /**
+     * The constructor
+     *
+     * @access public
+     * @param integer $No   The PPS index
+     * @param string $name  The PPS name (in Unicode)
+     * @param integer $type The PPS type. Dir, Root or File
+     * @param integer $prev The index of the previous PPS
+     * @param integer $next The index of the next PPS
+     * @param integer $dir  The index of it's first child if this is a Dir or Root PPS
+     * @param integer $time_1st A timestamp
+     * @param integer $time_2nd A timestamp
+     * @param array   $children Array containing children PPS for this PPS
+     */
+    function OLE_PPS($No, $name, $type, $prev, $next, $dir, $time_1st, $time_2nd, $data, $children)
+    {
+        $this->__construct($No, $name, $type, $prev, $next, $dir, $time_1st, $time_2nd, $data, $children);
     }
 
     /**
