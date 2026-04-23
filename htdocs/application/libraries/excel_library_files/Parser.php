@@ -160,12 +160,12 @@ class Spreadsheet_Excel_Writer_Parser
     var $_BIFF_version;
 
     /**
-    * The class constructor
-    *
-    * @param integer $byte_order The byte order (Little endian or Big endian) of the architecture
+     * The class constructor
+     *
+     * @param integer $byte_order The byte order (Little endian or Big endian) of the architecture
                                  (optional). 1 => big endian, 0 (default) little endian.
-    */
-    function Spreadsheet_Excel_Writer_Parser($byte_order, $biff_version)
+     */
+    function __construct($byte_order, $biff_version)
     {
         $this->_current_char  = 0;
         $this->_BIFF_version  = $biff_version;
@@ -177,6 +177,17 @@ class Spreadsheet_Excel_Writer_Parser
         $this->_byte_order = $byte_order; // Little Endian or Big Endian
         $this->_ext_sheets = array();
         $this->_references = array();
+    }
+
+    /**
+     * The class constructor
+     *
+     * @param integer $byte_order The byte order (Little endian or Big endian) of the architecture
+                                 (optional). 1 => big endian, 0 (default) little endian.
+     */
+    function Spreadsheet_Excel_Writer_Parser($byte_order, $biff_version)
+    {
+        $this->__construct($byte_order, $biff_version);
     }
 
     /**
@@ -1085,7 +1096,7 @@ class Spreadsheet_Excel_Writer_Parser
         $col    = 0;
         $col_ref_length = strlen($col_ref);
         for ($i = 0; $i < $col_ref_length; $i++) {
-            $col += (ord($col_ref{$i}) - ord('A') + 1) * pow(26, $expn);
+            $col += (ord($col_ref[$i]) - ord('A') + 1) * pow(26, $expn);
             $expn--;
         }
 
@@ -1107,27 +1118,27 @@ class Spreadsheet_Excel_Writer_Parser
         $formula_length = strlen($this->_formula);
         // eat up white spaces
         if ($i < $formula_length) {
-            while ($this->_formula{$i} == " ") {
+            while ($this->_formula[$i] == " ") {
                 $i++;
             }
 
             if ($i < ($formula_length - 1)) {
-                $this->_lookahead = $this->_formula{$i+1};
+                $this->_lookahead = $this->_formula[$i+1];
             }
             $token = '';
         }
 
         while ($i < $formula_length) {
-            $token .= $this->_formula{$i};
+            $token .= $this->_formula[$i];
             if ($i < ($formula_length - 1)) {
-                $this->_lookahead = $this->_formula{$i+1};
+                $this->_lookahead = $this->_formula[$i+1];
             } else {
                 $this->_lookahead = '';
             }
 
             if ($this->_match($token) != '') {
                 //if ($i < strlen($this->_formula) - 1) {
-                //    $this->_lookahead = $this->_formula{$i+1};
+                //    $this->_lookahead = $this->_formula[$i+1];
                 //}
                 $this->_current_char = $i + 1;
                 $this->_current_token = $token;
@@ -1135,7 +1146,7 @@ class Spreadsheet_Excel_Writer_Parser
             }
 
             if ($i < ($formula_length - 2)) {
-                $this->_lookahead = $this->_formula{$i+2};
+                $this->_lookahead = $this->_formula[$i+2];
             } else { // if we run out of characters _lookahead becomes empty
                 $this->_lookahead = '';
             }
@@ -1283,7 +1294,7 @@ class Spreadsheet_Excel_Writer_Parser
     {
         $this->_current_char = 0;
         $this->_formula      = $formula;
-        $this->_lookahead    = $formula{1};
+        $this->_lookahead    = $formula[1];
         $this->_advance();
         $this->_parse_tree   = $this->_condition();
         if (PEAR::isError($this->_parse_tree)) {

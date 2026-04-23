@@ -53,10 +53,9 @@
                      {
                         if(count($data) == 5)
                         {
-							// $sql = "INSERT INTO ".$group_table_name." (digits, sell_rate, cost_rate, buy_initblock, sell_initblock, carrier_id, lcr_profile, quality, reliability, enabled, lrn) VALUES ('".mysql_real_escape_string($data[0])."', '".mysql_real_escape_string($data[1])."', '".mysql_real_escape_string($data[2])."', '".mysql_real_escape_string($data[3])."', '".mysql_real_escape_string($data[4])."', '".$carrier."', '0', '0', '0', '1', '0')";
-							$sql = "INSERT INTO ".$group_table_name." (digits, cost_rate, sell_rate, buy_initblock, sell_initblock, carrier_id, lcr_profile, quality, reliability, enabled, lrn) VALUES ('".mysql_real_escape_string($data[0])."', '".mysql_real_escape_string($data[1])."', '".mysql_real_escape_string($data[2])."', '".mysql_real_escape_string($data[3])."', '".mysql_real_escape_string($data[4])."', '".$carrier."', '0', '0', '0', '1', '0')";
+							$sql = "INSERT INTO ".$group_table_name." (digits, cost_rate, sell_rate, buy_initblock, sell_initblock, carrier_id, lcr_profile, quality, reliability, enabled, lrn) VALUES (?, ?, ?, ?, ?, ?, '0', '0', '0', '1', '0')";
 							
-                            $this->db->query($sql);
+                            $this->db->query($sql, array($data[0], $data[1], $data[2], $data[3], $data[4], $carrier));
                         }
                      }
                      fclose($handle);

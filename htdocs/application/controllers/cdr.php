@@ -675,7 +675,7 @@ class Cdr extends CI_Controller {
 			$sql12 = "SELECT * FROM settings WHERE customer_id = '".$this->session->userdata('customer_id')."'";
 			$query12 = $this->db->query($sql12);
             $row12 = $query12->row();
-            if (!empty($row12){
+            if (!empty($row12)) {
                 $data_array = explode(',',$row12->optional_cdr_fields_include);
             } else {
             	$data_array = Array();
